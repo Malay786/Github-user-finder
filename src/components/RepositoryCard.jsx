@@ -67,7 +67,7 @@ const RepositoryCard = forwardRef(({ repo, languages }, ref) => {
   return (
     <li
       ref={ref}
-      className="bg-gradient-to-br from-[#FAF7F3] to-[#F0E4D3] dark:from-slate-800 dark:to-slate-700 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#DCC5B2] dark:border-slate-600 hover:border-[#D9A299] dark:hover:border-indigo-500 h-96 max-h-96 min-h-96 backdrop-blur-sm"
+      className="bg-gradient-to-br from-[#FAF7F3] to-[#F0E4D3] dark:from-slate-800 dark:to-slate-700 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#DCC5B2] dark:border-slate-600 hover:border-[#D9A299] dark:hover:border-indigo-500 h-78 max-h-78 min-h-78 backdrop-blur-sm"
     >
       <div className="flex flex-col flex-grow h-full">
         <div className="flex items-center justify-between mb-3">
@@ -84,12 +84,12 @@ const RepositoryCard = forwardRef(({ repo, languages }, ref) => {
           </span>
         </div>
         {repo.description && (
-          <p className="text-black dark:text-slate-300 text-sm line-clamp-3 mb-2 flex-shrink-0 overflow-hidden leading-relaxed">
+          <p className="text-black dark:text-slate-300 text-sm line-clamp-3 flex-shrink-0 overflow-hidden leading-relaxed">
             {repo.description}
           </p>
         )}
         {barData.length > 0 && (
-          <div className="mt-auto">
+          <div className="mt-6">
             {/* Language bar */}
             <div className="flex h-3 w-full rounded-full overflow-hidden mb-3 shadow-inner">
               {barData.map((item, idx) => (
