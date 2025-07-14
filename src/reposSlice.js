@@ -18,9 +18,6 @@ export const fetchRepos = createAsyncThunk(
     // Store the JSON response in a variable
     const reposData = await res.json();
     
-    // Log the repository data to console
-    console.log(`GitHub Repositories (Page ${page}):`, reposData);
-    
     return reposData;
   }
 );

@@ -13,7 +13,6 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async (username) => 
   }
   if (!res.ok) throw new Error('User not found');
   const userData = await res.json();
-  console.log(userData);
   return userData;
 });
 

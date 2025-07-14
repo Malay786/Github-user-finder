@@ -24,7 +24,6 @@ function App() {
 
   // Local state for search input
   const [username, setUsername] = useState("");
-  const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
   const [repoLanguages, setRepoLanguages] = useState({});
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme');
@@ -42,11 +41,7 @@ function App() {
   };
 
 
-  // useEffect(() => {
-  //   const handleResize = () => setIsMobile(window.innerWidth < 640);
-  //   window.addEventListener('resize', handleResize);
-  //   return () => window.removeEventListener('resize', handleResize);
-  // }, []);
+
 
   // Helper to determine if more repos can be loaded
   const hasMore = repos.length % perPage === 0 && repos.length > 0;
@@ -84,9 +79,6 @@ function App() {
             if (!res.ok) return;
             const langs = await res.json();
             newLangs[repo.id] = langs;
-            
-            // Log language data for this repository
-            console.log(`Languages for ${repo.name}:`, langs);
           } catch {}
         })
       );
@@ -125,7 +117,7 @@ function App() {
     }
   }, [user]);
 
-          //className="px-8 py-4 rounded-2xl bg-gradient-to-r from-[#D9A299] to-[#DCC5B2] hover:from-[#DCC5B2] hover:to-[#F0E4D3] dark:from-slate-900 dark:via-slate-800 dark:to-indigo-900 text-white font-semibold shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center gap-2">
+
 
   return (
     <div className={`min-h-screen w-full transition-all duration-300 ${
@@ -256,7 +248,7 @@ function App() {
             }`}>Public Repositories</h3>
             
             {/* Repository Sorting Component */}
-            {repos.length > 0 && <RepositorySorting isDarkMode={isDarkMode} />}
+            {repos.length > 0 && <RepositorySorting />}
             
             {reposError && <p className="text-red-500 font-medium bg-red-50 dark:bg-red-900/20 p-4 rounded-2xl border border-red-200 dark:border-red-800">{reposError}</p>}
             {!reposLoading && repos.length === 0 && <p className="text-black dark:text-slate-400 text-center p-8 bg-[#F0E4D3] dark:bg-slate-800/50 rounded-2xl border border-[#DCC5B2] dark:border-slate-700">No repositories found.</p>}
