@@ -12,7 +12,9 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async (username) => 
     throw new Error('API rate limit exceeded. Please try again later.');
   }
   if (!res.ok) throw new Error('User not found');
-  return await res.json();
+  const userData = await res.json();
+  console.log(userData);
+  return userData;
 });
 
 const userSlice = createSlice({

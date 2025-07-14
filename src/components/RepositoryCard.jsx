@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React from 'react';
 
 const LANGUAGE_COLORS = {
   JavaScript: '#f1e05a',
@@ -62,13 +62,10 @@ const getLanguageBarData = (languages, repoName) => {
   return bar;
 };
 
-const RepositoryCard = forwardRef(({ repo, languages }, ref) => {
+const RepositoryCard = ({ repo, languages }) => {
   const barData = getLanguageBarData(languages, repo.name);
   return (
-    <li
-      ref={ref}
-      className="bg-gradient-to-br from-[#FAF7F3] to-[#F0E4D3] dark:from-slate-800 dark:to-slate-700 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#DCC5B2] dark:border-slate-600 hover:border-[#D9A299] dark:hover:border-indigo-500 h-78 max-h-78 min-h-78 backdrop-blur-sm"
-    >
+    <li className="bg-gradient-to-br from-[#FAF7F3] to-[#F0E4D3] dark:from-slate-800 dark:to-slate-700 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-all duration-300 border border-[#DCC5B2] dark:border-slate-600 hover:border-[#D9A299] dark:hover:border-indigo-500 h-78 max-h-78 min-h-78 backdrop-blur-sm">
       <div className="flex flex-col flex-grow h-full">
         <div className="flex items-center justify-between mb-3">
           <a
@@ -115,6 +112,6 @@ const RepositoryCard = forwardRef(({ repo, languages }, ref) => {
       </div>
     </li>
   );
-});
+};
 
 export default RepositoryCard; 

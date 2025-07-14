@@ -14,7 +14,14 @@ export const fetchRepos = createAsyncThunk(
       throw new Error('API rate limit exceeded. Please try again later.');
     }
     if (!res.ok) throw new Error('Could not fetch repositories');
-    return res.json();
+    
+    // Store the JSON response in a variable
+    const reposData = await res.json();
+    
+    // Log the repository data to console
+    console.log(`GitHub Repositories (Page ${page}):`, reposData);
+    
+    return reposData;
   }
 );
 

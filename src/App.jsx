@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchUser } from './userSlice';
 import { fetchRepos, setPage, selectSortedRepos } from './reposSlice';
@@ -25,7 +25,6 @@ function App() {
   // Local state for search input
   const [username, setUsername] = useState("");
   const [isMobile, setIsMobile] = useState(window.innerWidth < 640);
-  const observer = useRef();
   const [repoLanguages, setRepoLanguages] = useState({});
   const [isDarkMode, setIsDarkMode] = useState(() => {
     const saved = localStorage.getItem('theme');
@@ -42,20 +41,12 @@ function App() {
     localStorage.setItem('theme', newMode ? 'dark' : 'light');
   };
 
-  // Apply theme to document
-  useEffect(() => {
-    if (isDarkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [isDarkMode]);
 
-  useEffect(() => {
-    const handleResize = () => setIsMobile(window.innerWidth < 640);
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, []);
+  // useEffect(() => {
+  //   const handleResize = () => setIsMobile(window.innerWidth < 640);
+  //   window.addEventListener('resize', handleResize);
+  //   return () => window.removeEventListener('resize', handleResize);
+  // }, []);
 
   // Helper to determine if more repos can be loaded
   const hasMore = repos.length % perPage === 0 && repos.length > 0;
@@ -93,6 +84,9 @@ function App() {
             if (!res.ok) return;
             const langs = await res.json();
             newLangs[repo.id] = langs;
+            
+            // Log language data for this repository
+            console.log(`Languages for ${repo.name}:`, langs);
           } catch {}
         })
       );
@@ -188,7 +182,7 @@ function App() {
                 isDarkMode ? 'text-slate-400' : 'text-gray-600'
               }`}>
                 <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
-                <span>Searching...</span>
+                
               </div>
             )}
           </div>
